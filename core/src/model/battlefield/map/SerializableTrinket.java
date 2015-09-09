@@ -5,6 +5,7 @@ import model.builders.definitions.BuilderManager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import model.builders.TrinketBuilder;
 
 public class SerializableTrinket {
 	@JsonProperty
@@ -34,9 +35,7 @@ public class SerializableTrinket {
 
 	@JsonIgnore
 	public Trinket getTrinket() {
-		Trinket res = BuilderManager.getTrinketBuilder(builderID).build(pos, yaw, modelPath, scaleX, scaleY, scaleZ);
-		return res;
-
+            return ((TrinketBuilder)BuilderManager.getBuilder("model.battlefield.map.Trinket",builderID, TrinketBuilder.class)).build(pos, yaw, modelPath, scaleX, scaleY, scaleZ);
 	}
 
 }

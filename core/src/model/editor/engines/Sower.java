@@ -42,9 +42,9 @@ public class Sower implements Runnable {
 	}
 	
 	private Trinket getRandomTrinket(){
-		List<TrinketBuilder> builders = BuilderManager.getAllEditableTrinketBuilders();
-		return builders.get(MyRandom.nextInt(builders.size())).build(Point3D.ORIGIN);
-		
+		//List<TrinketBuilder> builders = BuilderManager.getAllEditableTrinketBuilders();
+		//return builders.get(MyRandom.nextInt(builders.size())).build(Point3D.ORIGIN);
+		return null; // :P
 	}
 	
 	@Override

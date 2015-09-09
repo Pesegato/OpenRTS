@@ -65,9 +65,10 @@ public class MapStyleBuilder extends Builder{
 		}
 	}
 
-	public void build(Map map){
+	public Map build(){
+            Map map = new Map(width,height);
 		map.mapStyleID = getId();
-		map.style.cliffShapeBuilders = cliffShapeBuilders;
+		map.style.cliffShapeBuildersID = cliffShapeBuildersID;
 		map.style.diffuses = diffuses;
 		map.style.normals = normals;
 		map.style.scales = scales;
@@ -75,12 +76,13 @@ public class MapStyleBuilder extends Builder{
 		map.style.coverDiffuses = coverDiffuses;
 		map.style.coverNormals = coverNormals;
 		map.style.coverScales = coverScales;
+                return map;
 	}
 
 	@Override
 	public void readFinalizedLibrary() {
 		for(String s : cliffShapeBuildersID) {
-			cliffShapeBuilders.add(BuilderManager.getCliffShapeBuilder(s));
+		//	cliffShapeBuilders.add(BuilderManager.getCliffShapeBuilder(s));
 		}
 	}
 }

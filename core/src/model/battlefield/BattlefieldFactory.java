@@ -22,6 +22,7 @@ import model.builders.definitions.BuilderManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.smile.SmileFactory;
+import model.builders.CliffShapeBuilder;
 
 /**
  * this class serializes and deserializes a battlefield into and from files everything is translated in and from XML format, except for the texture atlas of the
@@ -35,9 +36,9 @@ public class BattlefieldFactory {
 
 	public Battlefield getNew(int width, int height) {
 		LogUtil.logger.info("Creating new battlefield...");
-		MapStyleBuilder styleBuilder = BuilderManager.getMapStyleBuilder("StdMapStyle");
-		Map m = new Map(styleBuilder.width, styleBuilder.height);
-		styleBuilder.build(m);
+		//MapStyleBuilder styleBuilder = BuilderManager.getMapStyleBuilder("StdMapStyle");
+		//Map m = new Map(styleBuilder.width, styleBuilder.height);
+		Map m = ((MapStyleBuilder) BuilderManager.getBuilder("model.builders.MapStyleBuilder", "StdMapStyle", MapStyleBuilder.class)).build();
 
 		for (int y = 0; y < m.height; y++) {
 			for (int x = 0; x < m.width; x++) {
@@ -83,6 +84,7 @@ public class BattlefieldFactory {
 			ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
 
 			bField = mapper.readValue(file, Battlefield.class);
+                        bField.setMap(((MapStyleBuilder)BuilderManager.getBuilder("model.builder.MapStyleBuilder",bField.getMap().mapStyleID,MapStyleBuilder.class)).build());
 
 			bField.setFileName(file.getCanonicalPath());
 			bField.getMap().atlas.finalize();
@@ -99,7 +101,6 @@ public class BattlefieldFactory {
 
 		LogUtil.logger.info("   builders");
 
-		BuilderManager.getMapStyleBuilder(bField.getMap().mapStyleID).build(bField.getMap());
 
 		LogUtil.logger.info("   tiles' links");
 		linkTiles(bField.getMap());
@@ -130,7 +131,7 @@ public class BattlefieldFactory {
 		int i = 0;
 		for (Tile t : bField.getMap().getTiles()) {
 			for (Cliff c : t.getCliffs()) {
-				BuilderManager.getCliffShapeBuilder(t.getCliffShapeID()).build(c);
+				((CliffShapeBuilder)BuilderManager.getBuilder("model.builders.CliffShapeBuilder",t.getCliffShapeID(),CliffShapeBuilder.class)).build(c);
 				i++;
 			}
 		}

@@ -7,6 +7,7 @@ import java.awt.Color;
 import model.battlefield.abstractComps.FieldComp;
 import model.battlefield.actors.ModelActor;
 import model.builders.actors.ModelActorBuilder;
+import model.builders.definitions.BuilderManager;
 
 /**
  * Specialized static field comp with a model actor.
@@ -16,7 +17,7 @@ public class Trinket extends FieldComp{
     private final ModelActor actor;
     public final String builderID;
     
-    public Trinket(boolean editable, double radius, String builderID, String modelPath, Point3D pos, double scaleX, double scaleY, double scaleZ, double rotX, double rotY, double rotZ, Color color, ModelActorBuilder actorBuilder) {
+    public Trinket(boolean editable, double radius, String builderID, String modelPath, Point3D pos, double scaleX, double scaleY, double scaleZ, double rotX, double rotY, double rotZ, Color color, String modelactorBuilderID) {
         super(pos, rotZ, radius*Math.max(scaleX, scaleY));
         this.editable = editable;
         this.builderID = builderID;
@@ -28,7 +29,7 @@ public class Trinket extends FieldComp{
         this.roll = rotX;
         this.pitch = rotY;
         this.color = color;
-        actor = actorBuilder.build(this);
+        actor = ((ModelActorBuilder) BuilderManager.getBuilder("model.builders.ModelActorBuilder", modelactorBuilderID, ModelActorBuilder.class)).build(this);
     }
     
     public void removeFromBattlefield(){

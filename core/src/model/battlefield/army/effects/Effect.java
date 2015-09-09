@@ -16,13 +16,13 @@ import model.builders.EffectBuilder;
  * 
  */
 public abstract class Effect {
-    protected final ArrayList<EffectBuilder> childEffectBuilders;
+    protected final ArrayList<String> childEffectBuildersID;
     
     public final EffectSource source;
     public final EffectTarget target;
 
-    public Effect(ArrayList<EffectBuilder> childEffectBuilders, EffectSource source, EffectTarget target) {
-        this.childEffectBuilders = childEffectBuilders;
+    public Effect(ArrayList<String> childEffectBuildersID, EffectSource source, EffectTarget target) {
+        this.childEffectBuildersID = childEffectBuildersID;
         this.source = source;
         this.target = target;
     }

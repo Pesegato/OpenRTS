@@ -64,27 +64,12 @@ public class CliffShapeBuilder extends Builder {
 	public void build(Cliff cliff) {
 		cliff.getTile().setCliffShapeID(def.getId());
 		if (naturalFaceBuilder != null) {
-			cliff.face = naturalFaceBuilder.build(cliff);
+			cliff.face = ((NaturalFaceBuilder)BuilderManager.getBuilder("model.builders.CliffShapeBuilder",naturalFaceBuilderID,NaturalFaceBuilder.class)).build(cliff);
 		} else {
-			cliff.face = manmadeFaceBuilder.build(cliff);
+			cliff.face = ((ManmadeFaceBuilder)BuilderManager.getBuilder("model.builders.ManmadeFaceBuilder",manmadeFaceBuilderID,ManmadeFaceBuilder.class)).build(cliff);
 		}
 		int i = 0;
 		cliff.trinkets.clear();
-		if (cliff.getTile().ramp == null) {
-			for (TrinketBuilder tb : trinketBuilders) {
-				if (MyRandom.next() < trinketProbs.get(i)) {
-					cliff.trinkets.add(tb.build(cliff));
-				}
-			}
-			i++;
-		} else {
-			for (TrinketBuilder tb : rampTrinketBuilders) {
-				if (MyRandom.next() < rampTrinketProbs.get(i)) {
-					cliff.trinkets.add(tb.build(cliff));
-				}
-			}
-			i++;
-		}
 	}
 
 	public String getID() {
@@ -98,16 +83,16 @@ public class CliffShapeBuilder extends Builder {
 	@Override
 	public void readFinalizedLibrary() {
 		if (!naturalFaceBuilderID.isEmpty()) {
-			naturalFaceBuilder = BuilderManager.getNaturalFaceBuilder(naturalFaceBuilderID);
+			//naturalFaceBuilder = (NaturalFaceBuilder)BuilderManager.getBuilder("model.builders.CliffShapeBuilder",naturalFaceBuilderID,NaturalFaceBuilder.class).build(naturalFaceBuilderID);
 		}
 		if (!manmadeFaceBuilderID.isEmpty()) {
-			manmadeFaceBuilder = BuilderManager.getManmadeFaceBuilder(manmadeFaceBuilderID);
+			//manmadeFaceBuilder = BuilderManager.getManmadeFaceBuilder(manmadeFaceBuilderID);
 		}
 		for (String s : trinketBuildersID) {
-			trinketBuilders.add(BuilderManager.getTrinketBuilder(s));
+			//trinketBuilders.add(BuilderManager.getTrinketBuilder(s));
 		}
 		for (String s : rampTrinketBuildersID) {
-			rampTrinketBuilders.add(BuilderManager.getTrinketBuilder(s));
+			//rampTrinketBuilders.add(BuilderManager.getTrinketBuilder(s));
 		}
 	}
 }

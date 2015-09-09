@@ -5,6 +5,7 @@ import geometry.math.MyRandom;
 import java.util.ArrayList;
 
 import model.builders.EffectBuilder;
+import model.builders.definitions.BuilderManager;
 
 /**
  * This effect is made to launch its children with temporality.
@@ -30,7 +31,7 @@ public class PersistentEffect extends Effect {
     public PersistentEffect(int periodCount,
             ArrayList<Double> durations,
             ArrayList<Double> ranges,
-            ArrayList<EffectBuilder> effectBuilders,
+            ArrayList<String> effectBuilders,
             EffectSource source,
             EffectTarget target) {
         super(effectBuilders, source, target);
@@ -52,9 +53,9 @@ public class PersistentEffect extends Effect {
         if(!source.isStillActiveSource())
             terminated = true;
         if(!terminated && lastPeriod+currentPeriodDuration < System.currentTimeMillis()){
-            childEffectBuilders.get(effectIndex).build(source, target, null).launch();
+            ((EffectBuilder)BuilderManager.getBuilder("model.builder.EffectBuilder",childEffectBuildersID.get(effectIndex),EffectBuilder.class)).build(source, target, null).launch();
             
-            if(++effectIndex >= childEffectBuilders.size())
+            if(++effectIndex >= childEffectBuildersID.size())
                 effectIndex = 0;
             if(++periodIndex >= durations.size())
                 periodIndex = 0;

@@ -12,6 +12,7 @@ import model.battlefield.army.effects.Effect;
 import model.battlefield.army.effects.EffectSource;
 import model.builders.EffectBuilder;
 import model.builders.actors.ActorBuilder;
+import model.builders.definitions.BuilderManager;
 
 /**
  * Weapons have two roles : - find and acquire the best available target - launch the chain of effects whenever it is possible For now, weapons choose
@@ -24,7 +25,7 @@ public class Weapon implements EffectSource {
 	public final double range;
 	public final double scanRange;
 	public final double period;
-	public final EffectBuilder effectBuilder;
+	public final String effectBuilderID;
 	public final String sourceBone;
 	public final String directionBone;
 	public final boolean allowMovement = false;
@@ -44,18 +45,18 @@ public class Weapon implements EffectSource {
 	protected List<Unit> onScan = new ArrayList<>();
 	protected List<Unit> atRange = new ArrayList<>();
 
-	public Weapon(String UIName, double range, double scanRange, double period, EffectBuilder effectBuilder, String sourceBone, String directionBone,
-			Unit holder, ActorBuilder actorBuilder, Turret turret) {
+	public Weapon(String UIName, double range, double scanRange, double period, String effectBuilderID, String sourceBone, String directionBone,
+			Unit holder, String actorBuilderID, Turret turret) {
 		this.UIName = UIName;
 		this.range = range;
 		this.scanRange = scanRange;
 		this.period = period;
-		this.effectBuilder = effectBuilder;
+		this.effectBuilderID = effectBuilderID;
 		this.sourceBone = sourceBone;
 		this.directionBone = directionBone;
 		this.holder = holder;
-		if (actorBuilder != null) {
-			this.actor = actorBuilder.build("", holder.actor);
+		if (actorBuilderID != null) {
+			this.actor = ((ActorBuilder) BuilderManager.getBuilder("model.builders.ActorBuilder", actorBuilderID, ActorBuilder.class)).build("", holder.actor);
 		} else {
 			this.actor = null;
 		}
@@ -144,7 +145,7 @@ public class Weapon implements EffectSource {
 				actor.onShootEvent();
 			}
 			target.ai.registerAsAttacker(holder);
-			Effect e = effectBuilder.build(this, target, null);
+			Effect e = ((EffectBuilder) BuilderManager.getBuilder("model.builders.EffectBuilder", effectBuilderID, EffectBuilder.class)).build(this, target, null);
 			e.launch();
 
 			lastStrikeTime = System.currentTimeMillis();

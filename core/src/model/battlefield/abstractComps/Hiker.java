@@ -4,6 +4,7 @@ import geometry.geom3d.Point3D;
 import geometry.math.Angle;
 import model.battlefield.army.components.Mover;
 import model.builders.MoverBuilder;
+import model.builders.definitions.BuilderManager;
 
 /**
  * A basic abstract entity, containing all needed attributes and methods to set a moving object on the battlefield
@@ -14,11 +15,11 @@ public abstract class Hiker extends FieldComp{
     public final double mass;
     public final Mover mover;
 
-    public Hiker(double radius, double speed, double mass, Point3D pos, double yaw, MoverBuilder moverBuilder) {
+    public Hiker(double radius, double speed, double mass, Point3D pos, double yaw, String moverBuilderID) {
         super(pos, yaw, radius);
         this.speed = speed;
         this.mass = mass;
-        this.mover = moverBuilder.build(this);
+        this.mover = ((MoverBuilder) BuilderManager.getBuilder("model.builders.MoverBuilder",moverBuilderID, MoverBuilder.class)).build(this);
         mover.desiredYaw = yaw;
     }
     public Hiker(double radius, double speed, double mass, Point3D pos, double yaw, Mover mover) {

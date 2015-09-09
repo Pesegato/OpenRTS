@@ -78,7 +78,7 @@ public class ActorBuilder extends Builder {
 	@Override
 	public void readFinalizedLibrary() {
 		for (String s : childrenActorBuildersID) {
-			childrenActorBuilders.add(BuilderManager.getActorBuilder(s));
+//			childrenActorBuilders.add(BuilderManager.getActorBuilder(s));
 		}
 	}
 

@@ -8,6 +8,7 @@ import model.battlefield.warfare.Faction;
 import model.builders.definitions.BuilderManager;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import model.builders.UnitBuilder;
 
 /**
  * Stores the minimal information needed to define a unit at this initial position.
@@ -39,7 +40,7 @@ public class SerializableUnit {
 	public Unit getUnit(List<Faction> factions) {
 		for(Faction f : factions) {
 			if (f.getName().equals(factionName)) {
-				Unit u = BuilderManager.getUnitBuilder(builderID).build(f, pos, yaw);
+				Unit u = ((UnitBuilder) BuilderManager.getBuilder("model.builders.UnitBuilder",builderID, UnitBuilder.class)).build(f, pos, yaw);
 				u.drawOnBattlefield();
 				return u;
 			}

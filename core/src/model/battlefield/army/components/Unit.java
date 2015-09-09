@@ -15,8 +15,10 @@ import model.battlefield.army.tacticalAI.TacticalAI;
 import model.battlefield.warfare.Faction;
 import model.builders.MoverBuilder;
 import model.builders.TurretBuilder;
+import model.builders.UnitBuilder;
 import model.builders.WeaponBuilder;
 import model.builders.actors.ModelActorBuilder;
+import model.builders.definitions.BuilderManager;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -47,9 +49,9 @@ public class Unit extends Hiker implements EffectSource, EffectTarget {
 	public STATE state = STATE.IDLING;
 	public boolean selected = false;
 
-	public Unit(double radius, double speed, double mass, Point3D pos, double yaw, MoverBuilder moverBuilder, String UIName, String BuilderID, String race,
-			int maxHealth, Faction faction, ModelActorBuilder actorBuilder) {
-		super(radius, speed, mass, pos, yaw, moverBuilder);
+	public Unit(double radius, double speed, double mass, Point3D pos, double yaw, String moverBuilderID, String UIName, String BuilderID, String race,
+			int maxHealth, Faction faction, String actorBuilderID) {
+		super(radius, speed, mass, pos, yaw, moverBuilderID);
 		this.UIName = UIName;
 		this.builderID = BuilderID;
 		this.race = race;
@@ -58,7 +60,7 @@ public class Unit extends Hiker implements EffectSource, EffectTarget {
 		arming = new Arming(this);
 		setFaction(faction);
 		health = maxHealth;
-		actor = actorBuilder.build(this);
+		actor = ((ModelActorBuilder) BuilderManager.getBuilder("model.builders.ModelActorBuilder",actorBuilderID,ModelActorBuilder.class)).build(this);
 	}
 
 	public Unit(Unit o) {
@@ -192,13 +194,13 @@ public class Unit extends Hiker implements EffectSource, EffectTarget {
 		return arming.turrets;
 	}
 
-	public void addWeapon(WeaponBuilder weaponBuilder, TurretBuilder turretBuilder) {
+	public void addWeapon(String weaponBuilderID, String turretBuilderID) {
 		Turret t = null;
-		if (turretBuilder != null) {
-			t = turretBuilder.build(this);
+		if (turretBuilderID != null) {
+			t = ((TurretBuilder) BuilderManager.getBuilder("model.builders.TurretBuilder",turretBuilderID, TurretBuilder.class)).build(this);
 			arming.turrets.add(t);
 		}
-		arming.weapons.add(weaponBuilder.build(this, t));
+		arming.weapons.add(((WeaponBuilder)BuilderManager.getBuilder("model.builders.WeaponBuilder", weaponBuilderID, WeaponBuilder.class)).build(this, t));
 	}
 
 	@Override

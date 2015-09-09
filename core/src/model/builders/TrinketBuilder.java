@@ -147,7 +147,7 @@ public class TrinketBuilder extends Builder {
 	}
 
 	public Trinket build(Point3D pos, double yaw, String modelPath, double scaleX, double scaleY, double scaleZ) {
-		return new Trinket(editable, radius, getId(), modelPath, pos, scaleX, scaleY, scaleZ, 0, 0, yaw, color, actorBuilder);
+		return new Trinket(editable, radius, getId(), modelPath, pos, scaleX, scaleY, scaleZ, 0, 0, yaw, color, actorBuilderID);
 
 	}
 
@@ -171,7 +171,7 @@ public class TrinketBuilder extends Builder {
 			i = MyRandom.nextInt(modelPaths.size() - 1);
 		}
 		String randomModelPath = modelPaths.get(i);
-		return new Trinket(editable, radius, getId(), randomModelPath, offsetPos, scaleX, scaleY, scaleZ, rotX, rotY, rotZ, color, actorBuilder);
+		return new Trinket(editable, radius, getId(), randomModelPath, offsetPos, scaleX, scaleY, scaleZ, rotX, rotY, rotZ, color, actorBuilderID);
 	}
 
 	public Trinket build(Cliff cliff) {
@@ -205,7 +205,7 @@ public class TrinketBuilder extends Builder {
 
 	@Override
 	public void readFinalizedLibrary() {
-		actorBuilder = (ModelActorBuilder) BuilderManager.getActorBuilder(actorBuilderID);
+		//actorBuilder = (ModelActorBuilder) BuilderManager.getActorBuilder(actorBuilderID);
 	}
 
 }

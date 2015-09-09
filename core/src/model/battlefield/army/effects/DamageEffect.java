@@ -12,7 +12,7 @@ import model.builders.EffectBuilder;
 public class DamageEffect extends Effect {
     protected final int amount;
 
-    public DamageEffect(int amount, ArrayList<EffectBuilder> effectBuilders, EffectSource source, EffectTarget target) {
+    public DamageEffect(int amount, ArrayList<String> effectBuilders, EffectSource source, EffectTarget target) {
         super(effectBuilders, source, target);
         this.amount = amount;
     }

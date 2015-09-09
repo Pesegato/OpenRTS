@@ -9,7 +9,7 @@ import model.builders.CliffShapeBuilder;
  *
  */
 public class MapStyle {
-    public List<CliffShapeBuilder> cliffShapeBuilders = new ArrayList<>();
+    public List<String> cliffShapeBuildersID = new ArrayList<>();
     
     public List<String> diffuses = new ArrayList<>();
     public List<String> normals = new ArrayList<>();

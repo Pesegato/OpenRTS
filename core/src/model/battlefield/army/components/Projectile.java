@@ -11,7 +11,9 @@ import model.battlefield.actors.ModelActor;
 import model.battlefield.army.effects.EffectSource;
 import model.battlefield.army.effects.EffectTarget;
 import model.builders.MoverBuilder;
+import model.builders.actors.ActorBuilder;
 import model.builders.actors.ModelActorBuilder;
+import model.builders.definitions.BuilderManager;
 
 /**
  * Projectile is a special Hiker that flies to a target accordingly to a flight plan.
@@ -44,18 +46,18 @@ public class Projectile extends Hiker {
 			double speed,
 			double mass,
 			EffectSource source,
-			MoverBuilder moverBuilder,
+			String moverBuilderID,
 			PRECISION_TYPE precisionType,
 			double precision,
-			ModelActorBuilder actorBuilder,
+			String actorBuilderID,
 			EffectTarget target,
 			Point3D targetPoint) {
-		super(radius, speed, mass, source.getPos(), source.getYaw(), moverBuilder);
+		super(radius, speed, mass, source.getPos(), source.getYaw(), moverBuilderID);
 		this.precisionType = precisionType;
 		this.precision = precision;
 		this.target = target;
 		this.targetPoint = targetPoint;
-		actor = actorBuilder.build(this);
+		actor = ((ModelActorBuilder) BuilderManager.getBuilder("model.builders.actor.ModelActorBuilder",actorBuilderID,ModelActorBuilder.class)).build(this);
 		mover.velocity = source.getDirection();
 		upDirection = null;
 		updateTargetPoint();

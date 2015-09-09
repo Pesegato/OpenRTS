@@ -70,15 +70,15 @@ public class ProjectileBuilder extends Builder {
 	}
 
 	public Projectile build(EffectSource source, EffectTarget target, Point3D targetPoint) {
-		Projectile res = new Projectile(radius, speed, mass, source, moverBuilder, precisionType, precision, actorBuilder, target, targetPoint);
+		Projectile res = new Projectile(radius, speed, mass, source, moverLink, precisionType, precision, actorLink, target, targetPoint);
 		ArmyManager.registerProjectile(res);
 		return res;
 	}
 
 	@Override
 	public void readFinalizedLibrary() {
-		moverBuilder = BuilderManager.getMoverBuilder(moverLink);
-		actorBuilder = (ModelActorBuilder) BuilderManager.getActorBuilder(actorLink);
+		//moverBuilder = BuilderManager.getMoverBuilder(moverLink);
+		//actorBuilder = (ModelActorBuilder) BuilderManager.getActorBuilder(actorLink);
 	}
 
 }

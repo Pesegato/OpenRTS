@@ -96,11 +96,12 @@ public class EditorGUIController extends GUIController {
 			return;
 		}
 		int selectionIndex = event.getSelectionItemIndex();
-		MapStyleBuilder builder = BuilderManager.getAllMapStyleBuilders().get(selectionIndex);
+                //commented for now
+		/*MapStyleBuilder builder = BuilderManager.getAllMapStyleBuilders().get(selectionIndex);
 		if (!ModelManager.getBattlefield().getMap().mapStyleID.equals(builder.getId())) {
 			ModelManager.getBattlefield().getMap().mapStyleID = builder.getId();
 			ModelManager.reload();
-		}
+		}*/
 	}
 
 	public void load() {

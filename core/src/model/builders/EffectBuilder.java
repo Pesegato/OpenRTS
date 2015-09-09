@@ -75,21 +75,21 @@ public class EffectBuilder extends Builder {
 	public Effect build(EffectSource source, EffectTarget target, Point3D targetPoint) {
 		Projectile projectile = null;
 		if (projectileLink != null) {
-			projectile = BuilderManager.getProjectileBuilder(projectileLink).build(source, target, targetPoint);
+			projectile = ((ProjectileBuilder) BuilderManager.getBuilder("model.builders.ProjectileBuilder",projectileLink, ProjectileBuilder.class)).build(source, target, targetPoint);
 			projectile.drawOnBattlefield();
 		}
 
 		Effect res;
 		switch (type) {
 			case TYPE_DAMAGE:
-				res = new DamageEffect(amount, effectBuilders, source, target);
+				res = new DamageEffect(amount, effectBuildersID, source, target);
 				break;
 			case TYPE_PERSISTENT:
-				res = new PersistentEffect(periodCount, durations, ranges, effectBuilders, source, target);
+				res = new PersistentEffect(periodCount, durations, ranges, effectBuildersID, source, target);
 				ArmyManager.addPersistentEffect((PersistentEffect) res);
 				break;
 			case TYPE_LAUNCHER:
-				res = new LauncherEffect(projectile, effectBuilders, source, target);
+				res = new LauncherEffect(projectile, effectBuildersID, source, target);
 				break;
 			default:
 				printUnknownValue(TYPE, type);
@@ -101,7 +101,7 @@ public class EffectBuilder extends Builder {
 	@Override
 	public void readFinalizedLibrary() {
 		for (String s : effectBuildersID) {
-			effectBuilders.add(BuilderManager.getEffectBuilder(s));
+//			effectBuilders.add(BuilderManager.getEffectBuilder(s));
 		}
 	}
 

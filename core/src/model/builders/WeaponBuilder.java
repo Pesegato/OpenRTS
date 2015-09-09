@@ -68,15 +68,15 @@ public class WeaponBuilder extends Builder {
 	}
 
 	public Weapon build(Unit holder, Turret t) {
-		Weapon res = new Weapon(UIName, range, scanRange, period, effectBuilder, sourceBone, directionBone, holder, actorBuilder, t);
+		Weapon res = new Weapon(UIName, range, scanRange, period, effectBuilderID, sourceBone, directionBone, holder, actorBuilderID, t);
 		return res;
 	}
 
 	@Override
 	public void readFinalizedLibrary() {
-		effectBuilder = BuilderManager.getEffectBuilder(effectBuilderID);
+		//effectBuilder = BuilderManager.getEffectBuilder(effectBuilderID);
 		if (!actorBuilderID.isEmpty()) {
-			actorBuilder = BuilderManager.getActorBuilder(actorBuilderID);
+		//	actorBuilder = BuilderManager.getActorBuilder(actorBuilderID);
 		}
 	}
 

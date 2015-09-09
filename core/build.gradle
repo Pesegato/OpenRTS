@@ -20,6 +20,7 @@ repositories {
 dependencies {
 	compile fileTree(dir: 'lib', include: ['*.jar'])
 
+        compile project(':GoldMonkey')
 	compile "com.jme3:jme3-core:$jmonkeyengine_version.+"
 	compile "com.jme3:jme3-effects:$jmonkeyengine_version.+"
 	compile "com.jme3:jme3-networking:$jmonkeyengine_version.+"

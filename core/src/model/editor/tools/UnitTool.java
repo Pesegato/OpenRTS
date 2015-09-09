@@ -38,9 +38,10 @@ public class UnitTool extends Tool {
 	public UnitTool() {
 		super(ADD_REMOVE_OP, MOVE_ROTATE_OP);
 		List<String> builderIDs = new ArrayList<>();
-		for (UnitBuilder b : BuilderManager.getAllUnitBuilders()) {
+                //commented for now
+		/*for (UnitBuilder b : BuilderManager.getAllUnitBuilders()) {
 			builderIDs.add(b.getUIName());
-		}
+		}*/
 		set = new AssetSet(builderIDs, false);
 	}
 
@@ -84,13 +85,14 @@ public class UnitTool extends Tool {
 			}
 		}
 		// TODO: what happend, if there is no Race named "human"?
-		Faction f = BuilderManager.getAllUnitBuilders().get(set.actual).hasRace("human") ?
+                //commented for now
+		/*Faction f = BuilderManager.getAllUnitBuilders().get(set.actual).hasRace("human") ?
 				ModelManager.getBattlefield().getEngagement().getFactions().get(0)
 				: ModelManager.getBattlefield().getEngagement().getFactions().get(1);
 
-		Unit u = BuilderManager.getAllUnitBuilders().get(set.actual).build(f, coord.get3D(0), MyRandom.between(-Angle.FLAT, Angle.FLAT));
+		/*Unit u = BuilderManager.getAllUnitBuilders().get(set.actual).build(f, coord.get3D(0), MyRandom.between(-Angle.FLAT, Angle.FLAT));
 		u.drawOnBattlefield();
-		ArmyManager.registerUnit(u);
+		ArmyManager.registerUnit(u);*/
 	}
 
 	private void remove() {

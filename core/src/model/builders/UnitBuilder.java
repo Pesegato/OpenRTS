@@ -85,13 +85,13 @@ public class UnitBuilder extends Builder {
 	}
 
 	public Unit build(Faction faction, Point3D pos, double yaw) {
-		Unit res = new Unit(radius, speed, mass, pos, yaw, moverBuilder, UIName, getId(), race, maxHealth, faction, actorBuilder);
+		Unit res = new Unit(radius, speed, mass, pos, yaw, moverBuilderID, UIName, getId(), race, maxHealth, faction, actorBuilderID);
 
 		int i = 0;
-		for (WeaponBuilder wb : weaponBuilders) {
-			TurretBuilder tb = null;
-			if (turretBuilders.get(i) != null) {
-				tb = turretBuilders.get(i);
+		for (String wb : weaponBuildersID) {
+			String tb = null;
+			if (turretBuildersID.get(i) != null) {
+				tb = turretBuildersID.get(i);
 			}
 			res.addWeapon(wb, tb);
 			i++;
@@ -110,15 +110,15 @@ public class UnitBuilder extends Builder {
 
 	@Override
 	public void readFinalizedLibrary() {
-		actorBuilder = (ModelActorBuilder) BuilderManager.getActorBuilder(actorBuilderID);
-		moverBuilder = BuilderManager.getMoverBuilder(moverBuilderID);
+		//actorBuilder = (ModelActorBuilder) BuilderManager.getBuilder("model.builders.UnitBuilder",actorBuilderID).build();
+		//moverBuilder = (MoverBuilder) BuilderManager.getBuilder("model.builders.MoverBuilder",moverBuilderID).build();
 		int i = 0;
 		for (String s : weaponBuildersID) {
-			weaponBuilders.add(BuilderManager.getWeaponBuilder(s));
+			//weaponBuilders.add((WeaponBuilder) BuilderManager.getBuilder("model.builders.WeaponBuilder",s).build());
 			if (turretBuildersID.get(i) == null) {
 				turretBuilders.add(null);
 			} else {
-				turretBuilders.add(BuilderManager.getTurretBuilder(turretBuildersID.get(i)));
+				//turretBuilders.add((TurretBuilder)BuilderManager.getBuilder("model.builder.TurretBuilder",turretBuildersID.get(i)).build());
 			}
 			i++;
 		}

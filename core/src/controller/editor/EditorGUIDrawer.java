@@ -155,13 +155,15 @@ public class EditorGUIDrawer extends GUIDrawer {
 	}
 
 	private void drawMapStyleDropDown() {
-		List<MapStyleBuilder> builders = BuilderManager.getAllMapStyleBuilders();
+            //commented for now
+		/*List<MapStyleBuilder> builders = BuilderManager.getAllMapStyleBuilders();
 		List<String> ids = new ArrayList<>();
 		for (MapStyleBuilder b : builders) {
 			ids.add(b.getId());
 		}
 		int selIndex = ids.indexOf(ModelManager.getBattlefield().getMap().mapStyleID);
 		fillDropDown(DROPDOWN_STYLE_ID, ids, selIndex);
+                        */
 	}
 
 	private void drawPencilPanel() {

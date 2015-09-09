@@ -38,9 +38,10 @@ public class TrinketTool extends Tool {
 	public TrinketTool() {
 		super(ADD_REMOVE_OP, MOVE_ROTATE_OP);
 		List<String> builderIDs = new ArrayList<>();
-		for (TrinketBuilder b : BuilderManager.getAllEditableTrinketBuilders()) {
+                //commented for now
+		/*for (TrinketBuilder b : BuilderManager.getAllEditableTrinketBuilders()) {
 			builderIDs.add(b.getId());
-		}
+		}*/
 		set = new AssetSet(builderIDs, false);
 	}
 
@@ -77,7 +78,8 @@ public class TrinketTool extends Tool {
 	}
 
 	private void add() {
-		Point2D pos = pencil.getCoord();
+            //commented for now
+		/*Point2D pos = pencil.getCoord();
 		for (Trinket t : ModelManager.getBattlefield().getMap().trinkets) {
 			if (t.pos.equals(pos)) {
 				pos = pos.getTranslation(MyRandom.between(Angle.FLAT, -Angle.FLAT), 0.1);
@@ -86,7 +88,7 @@ public class TrinketTool extends Tool {
 		Trinket t = BuilderManager.getAllEditableTrinketBuilders().get(set.actual)
 				.build(pos.get3D(ModelManager.getBattlefield().getMap().getAltitudeAt(pos)));
 		t.drawOnBattlefield();
-		ModelManager.getBattlefield().getMap().trinkets.add(t);
+		ModelManager.getBattlefield().getMap().trinkets.add(t);*/
 	}
 
 	private void remove() {

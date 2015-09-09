@@ -13,6 +13,7 @@ import model.builders.CliffShapeBuilder;
 import model.editor.AssetSet;
 import model.editor.Pencil;
 import model.editor.ToolManager;
+import model.builders.definitions.BuilderManager;
 
 /**
  * @author Benoît
@@ -26,9 +27,10 @@ public class CliffTool extends Tool {
 	public CliffTool() {
 		super(RAISE_LOW_OP, FLATTEN_OP);
 		ArrayList<String> iconPaths = new ArrayList<>();
-		for (CliffShapeBuilder b : ModelManager.getBattlefield().getMap().style.cliffShapeBuilders) {
+                //commented for now
+		/*for (CliffShapeBuilder b : ModelManager.getBattlefield().getMap().style.cliffShapeBuilders) {
 			iconPaths.add(b.getIconPath());
-		}
+		}*/
 		set = new AssetSet(iconPaths, true);
 	}
 
@@ -110,7 +112,7 @@ public class CliffTool extends Tool {
 	}
 
 	public void buildShape(Cliff cliff) {
-		ModelManager.getBattlefield().getMap().style.cliffShapeBuilders.get(set.actual).build(cliff);
+		((CliffShapeBuilder)BuilderManager.getBuilder("model.builders.CliffShapeBuilder",ModelManager.getBattlefield().getMap().style.cliffShapeBuildersID.get(set.actual),CliffShapeBuilder.class)).build(cliff);
 	}
 
 }

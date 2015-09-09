@@ -34,6 +34,7 @@ import com.jme3.system.AppSettings;
 import com.jme3.system.JmeContext.Type;
 import com.jme3.system.JmeSystem;
 import com.jme3.util.BufferUtils;
+import com.pesegato.goldmonkey.GoldMonkeyAppState;
 
 public abstract class OpenRTSApplication extends Application implements PhysicsTickListener {
 
@@ -155,6 +156,34 @@ public abstract class OpenRTSApplication extends Application implements PhysicsT
 
 		// call user code
 		simpleInitApp();
+                stateManager.attach(new GoldMonkeyAppState(true,
+                        "/data/army",
+                        "/data/army/human/tank",
+                        "/data/maps",
+                        "/data/maps/trinkets",
+                        "/entities/dsl",
+                        "/interface",
+                        "/interface/fonts",
+                        "/interface/myNifty",
+                        "/interface/myNifty/myControls",
+                        "/interface/myNifty/myStyles",
+                        "/maps",
+                        "/matdefs",
+                        "/models",
+                        "/models/alien",
+                        "/models/alien/miniwalker",
+                        "/models/env/exterior01",
+                        "/models/env/interior01",
+                        "/models/human",
+                        "/models/human/adav",
+                        "/models/human/hmissileT1",
+                        "/models/human/htank",
+                        "/models/old",
+                        "/sounds",
+                        "/textures",
+                        "/textures/editor",
+                        "/textures/old",
+                        "/textures/particles"));
 		stateManager.attach(bulletAppState);
 		getPhysicsSpace().addTickListener(this);
 	}
